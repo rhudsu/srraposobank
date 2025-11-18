@@ -17,6 +17,8 @@ class movimentacao
         pessoa = this.pessoa1,
         pessoa2 = pessoa2,
         valor = valor
+        console.log(this)
+        return this
     }
 }
 
@@ -38,9 +40,7 @@ class cliente {
     {
         if(this == outro) 
             return 'Voce não pode transferir para voce mesmo'
-        if(this.saldoCliente <= valor) {
-
-            
+        if(this.saldoCliente >= valor) {
             outro.saldoCliente += valor
             this.saldoCliente -= valor
             console.log(`${outro.nome} Recebeu ${valor} de ${this.nome}`)
@@ -54,21 +54,22 @@ class cliente {
     
     salvarHistorico(idMov)
     {   
+        console.log(idMov)
         this.movimentacoesClientes.push(idMov)
     } 
 
-    constructor (nome, idade){
+    constructor (nome, idade, saldo){
         this.nome = nome
         this.idade = idade
-        this.saldoCliente = 0
+        this.saldoCliente = saldo
         this.historicoCliente = []
     }
 
 }
 
 
-hudson = new cliente('hudson', 10 )
-arthur = new cliente('Artgur', 10 )
+hudson = new cliente('hudson', 10,100 )
+arthur = new cliente('Artgur', 10, 10)
 
 hudson.transferencia(5, arthur)
 
