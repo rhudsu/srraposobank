@@ -9,31 +9,32 @@ class agencia {
 class movimentacao
 {
     datatime; 
-    pessoa1;
+    pessoa;
     pessoa2; valor;
     constructor (pessoa, valor, pessoa2 = null, datatime = new Date())
     {
-        datatime = new Date();
-        pessoa = this.pessoa1,
-        pessoa2 = pessoa2,
-        valor = valor
-        console.log(this)
+        this.datatime = new Date();
+        this.pessoa = pessoa,
+        this.pessoa2 = pessoa2,
+        this.valor = valor
         return this
     }
+
+    
 }
 
 class cliente {
     nome;
     idade;
     saldoCliente;
-    movimentacoesClientes = [];
+    movimentacoes = [];
  
     get saldo(){
         return this.SaldoCliente;
     }
 
     get historico(){
-        return this.historicoCliente;
+        return this.movimentacoes;
     }
 
     transferencia(valor, outro) 
@@ -55,7 +56,7 @@ class cliente {
     salvarHistorico(idMov)
     {   
         console.log(idMov)
-        this.movimentacoesClientes.push(idMov)
+        this.movimentacoes.push(idMov)
     } 
 
     constructor (nome, idade, saldo){
@@ -68,12 +69,16 @@ class cliente {
 }
 
 
-hudson = new cliente('hudson', 10,100 )
+hudson = new cliente('hudson', 10,100)
 arthur = new cliente('Artgur', 10, 10)
 
 hudson.transferencia(5, arthur)
 
 // const elemento = document.getElementById("navbar-brand");
-// elemento.style.color = "yellow";
+// elemento.text = "yellow";
 
-console.log(hudson.historico)
+
+
+hudson.historico.forEach(registro => {
+    console.log(registro)
+});
