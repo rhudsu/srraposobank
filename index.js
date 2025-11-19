@@ -55,7 +55,7 @@ class cliente {
     {
         if(this.SaldoCliente >= valor){
             this.saldoCliente -= valor;
-            this.salvarHistorico(new movimentacao(this, valor));
+            this.salvarHistorico(new movimentacao(this, -valor));
         }
         else console.log("Dinheiro insuficiente")  
     }
