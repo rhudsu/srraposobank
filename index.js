@@ -52,6 +52,16 @@ class cliente {
         else console.log("Dinheiro insuficiente")  
     }
 
+    saque(valor)
+    {
+        if(this.SaldoCliente >= valor){
+            this.saldoCliente -= valor;
+            this.salvarHistorico(new movimentacao(this, -valor));
+        }
+        else console.log("Dinheiro insuficiente")  
+    }
+
+
     
     salvarHistorico(idMov)
     {   
@@ -75,10 +85,6 @@ arthur = new cliente('Artgur', 10, 10)
 hudson.transferencia(5, arthur)
 
 // const elemento = document.getElementById("navbar-brand");
-// elemento.text = "yellow";
-
-
-
-hudson.historico.forEach(registro => {
-    console.log(registro)
-});
+// elemento.style.color = "yellow";
+hudson.saque(10)
+console.log(hudson.historico)
