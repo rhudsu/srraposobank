@@ -77,7 +77,11 @@ class cliente {
         else console.log("Dinheiro insuficiente")  
     }
 
-
+    deposito(valor)
+    {
+        this.saldoCliente += valor;
+        this.salvarHistorico(new movimentacao(this, +valor));
+    }
     
     salvarHistorico(idMov)
     {   
@@ -103,5 +107,6 @@ hudson.transferencia(5, arthur)
 
 // const elemento = document.getElementById("navbar-brand");
 // elemento.style.color = "yellow";
+hudson.deposito(10)
 hudson.saque(10)
 console.log(hudson.historico)
