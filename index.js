@@ -89,10 +89,10 @@ class cliente {
         this.movimentacoes.push(idMov)
     } 
 
-    constructor (nome, idade, saldo, agencia){
+    constructor (nome, idade, agencia){
         this.nome = nome;
         this.idade = idade;
-        this.saldoCliente = saldo;
+        this.saldoCliente = 0;
         this.historicoCliente = [];
         this.#agenciaId = agencia;
     }
@@ -100,8 +100,8 @@ class cliente {
 }
 
 agencia1 = new agencia('Rua Paraiba, 107, Centro - Tres Lagoas/MS')
-hudson = new cliente('hudson', 10, 100, agencia1.agencia)
-arthur = new cliente('Artgur', 10, 10, agencia1.agencia)
+hudson = new cliente('hudson', 10, agencia1.agencia)
+arthur = new cliente('Artgur', 10, agencia1.agencia)
 
 hudson.transferencia(5, arthur)
 
