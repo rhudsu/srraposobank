@@ -1,7 +1,18 @@
 class agencia {
-    agenciaId
+    static countAgencia = 1;
+    #agenciaId;
+    
+    static countAgenciaId(){
+        this.countAgencia++;
+    }
+    
+    get agenciaIda (){
+        return this.#agenciaId;
+    }
+
     constructor (){
-        agenciaId = this
+        this.#agenciaId = this.constructor.countAgencia;
+        this.constructor.countAgenciaId();
     }
 }
 
