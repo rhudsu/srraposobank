@@ -1,7 +1,18 @@
 class agencia {
-    agenciaId
+    static countAgencia = 1;
+    #id;
+
+    static countAgenciaId(){
+        this.countAgencia++;
+    }
+    
+    get agencia (){
+        return this.#id;
+    }
+
     constructor (){
-        agenciaId = this
+        this.#id = this.constructor.countAgencia;
+        this.constructor.countAgenciaId();
     }
 }
 
@@ -27,10 +38,15 @@ class cliente {
     nome;
     idade;
     saldoCliente;
+    #agenciaId;
     movimentacoes = [];
  
     get saldo(){
         return this.SaldoCliente;
+    }
+
+    get agencia(){
+        return this.#agenciaId;
     }
 
     get historico(){
@@ -69,18 +85,19 @@ class cliente {
         this.movimentacoes.push(idMov)
     } 
 
-    constructor (nome, idade, saldo){
-        this.nome = nome
-        this.idade = idade
-        this.saldoCliente = saldo
-        this.historicoCliente = []
+    constructor (nome, idade, saldo, agencia){
+        this.nome = nome;
+        this.idade = idade;
+        this.saldoCliente = saldo;
+        this.historicoCliente = [];
+        this.#agenciaId = agencia;
     }
 
 }
 
-
-hudson = new cliente('hudson', 10,100)
-arthur = new cliente('Artgur', 10, 10)
+agencia1 = new agencia('Rua Paraiba, 107, Centro - Tres Lagoas/MS')
+hudson = new cliente('hudson', 10, 100, agencia1.agencia)
+arthur = new cliente('Artgur', 10, 10, agencia1.agencia)
 
 hudson.transferencia(5, arthur)
 
