@@ -14,31 +14,33 @@
 
 
 // })
-document.getElementById('forms').addEventListener('submit', criarCliente);
-function criarCliente(event)
-{
+// function criarCliente(event)
+// {
+	
+// 	event.preventDefault()
+	
+//     const form = event.target
+	
+//     const dadosForm = new FormData(form)
+	
+//     const nome = dadosForm.get('nome')
     
-    event.preventDefault()
-
-    const form = event.target
-
-    const dadosForm = new FormData(form)
-
-    const nome = dadosForm.get('nome')
-    
-    const idade = dadosForm.get('idade')
-
-    const agencia_id = dadosForm.get('agencia')
-
-    const clientado = new cliente(nome, idade, agencia_id)
-}
+//     const idade = dadosForm.get('idade')
+	
+//     const agencia_id = dadosForm.get('agencia')
+	
+//     const clientado = new cliente(nome, idade, agencia_id)
+// }
+// async () => {
+// 	 await document.getElementById('forms').addEventListener('submit', criarCliente);
+// }
 
 // objetificação do hud
 
 class agencia {
-    static countAgencia = 1;
+	static countAgencia = 1;
     #id;
-
+	
     static countAgenciaId(){
         this.countAgencia++;
     }
@@ -59,7 +61,7 @@ class movimentacao
     datatime; 
     pessoa;
     pessoa2; valor;
-    constructor (pessoa, valor, pessoa2 = null, datatime = new Date())
+    constructor (pessoa, valor, pessoa2 = null)
     {
         this.datatime = new Date();
         this.pessoa = pessoa,
