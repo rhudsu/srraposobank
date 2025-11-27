@@ -13,9 +13,7 @@ Projeto de banco criado com intuito de treinar GitFlow.
 
 ## 👤 Autores
 
-- **Abner Arthur**
 - **Eduardo Perucci**
-- **Filipe Henrique**
 - **Hudson Batista**
 - **Inácio Azevedo**
 - **Kenzo Senna**
