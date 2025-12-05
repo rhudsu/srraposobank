@@ -14,26 +14,25 @@
 
 
 // })
-// function criarCliente(event)
-// {
+function criarCliente(event)
+{
 	
-// 	event.preventDefault()
+	event.preventDefault()
 	
-//     const form = event.target
+    const form = event.target
 	
-//     const dadosForm = new FormData(form)
+    const dadosForm = new FormData(form)
 	
-//     const nome = dadosForm.get('nome')
+    const nome = dadosForm.get('nome')
     
-//     const idade = dadosForm.get('idade')
+    const idade = dadosForm.get('idade')
 	
-//     const agencia_id = dadosForm.get('agencia')
+    const agencia_id = dadosForm.get('agencia')
 	
-//     const clientado = new cliente(nome, idade, agencia_id)
-// }
-// async () => {
-// 	 await document.getElementById('forms').addEventListener('submit', criarCliente);
-// }
+    const clientado = new cliente(nome, idade, agencia_id)
+}
+document.getElementById('forms').addEventListener('submit', criarCliente);
+
 
 // objetificação do hud
 
@@ -45,7 +44,7 @@ class agencia {
         this.countAgencia++;
     }
     
-    get agencia (){
+    get agenciaId (){
         return this.#id;
     }
 
@@ -61,7 +60,7 @@ class movimentacao
     datatime; 
     pessoa;
     pessoa2; valor;
-    constructor (pessoa, valor, pessoa2 = null)
+    constructor (pessoa, valor, pessoa2 = null, datatime = new Date())
     {
         this.datatime = new Date();
         this.pessoa = pessoa,
@@ -82,22 +81,23 @@ class cliente {
     #agenciaId;
     movimentacoes = [];
  
-    get getSaldo(){
-        return this.SaldoCliente;
+    get Saldo(){
+        return this.saldoCliente;
     }
 
-    set setSaldo(valor){
+    set Saldo(valor){
         this.saldoCliente += valor
     }
 
     get agencia(){
         return this.#agenciaId;
+        
     }
 
     get historico(){
         return this.movimentacoes;
     }
-''
+
     transferencia(valor, outro) 
     {
         if(this == outro) 
@@ -116,7 +116,7 @@ class cliente {
 
     saque(valor)
     {
-        if(this.SaldoCliente >= valor){
+        if(this.saldoCliente >= valor){
             this.setSaldo(-valor);
             this.salvarHistorico(new movimentacao(this, -valor));
         }
@@ -125,7 +125,7 @@ class cliente {
 
     deposito(valor)
     {
-        this.setSaldo(valor);
+        // Saldo = valor;
         this.salvarHistorico(new movimentacao(this, +valor));
     }
     
@@ -146,11 +146,11 @@ class cliente {
 }
 
 agencia1 = new agencia('Rua Paraiba, 107, Centro - Tres Lagoas/MS')
-hudson = new cliente('hudson', 10, agencia1.agencia)
-arthur = new cliente('Artgur', 10, agencia1.agencia)
+hudson = new cliente('hudson', 10, agencia1.agenciaId)
+arthur = new cliente('Artgur', 10, agencia1.agenciaId)
 
 hudson.transferencia(5, arthur)
-console.log(hudson.getSaldo)
+console.log(hudson.Saldo)
 // const elemento = document.getElementById("navbar-brand");
 // elemento.style.color = "yellow";
 hudson.deposito(10)
