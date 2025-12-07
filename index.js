@@ -109,7 +109,6 @@ class cliente extends pessoa {
 
     get Agencia(){
         return this.#agenciaId;
-        
     }
 
     get Historico(){
@@ -120,9 +119,9 @@ class cliente extends pessoa {
     {
         if(this == outro) 
             return 'Voce não pode transferir para voce mesmo'
-        if(this.#saldo >= valor) {
-            outro.Saldo(valor)
-            this.Saldo(-valor)
+        if(this.Saldo >= valor) {
+            outro.Saldo += valor
+            this.Saldo += -valor
            
             console.log(`${outro.nome} Recebeu ${valor} de ${this.nome}`)
 
@@ -134,8 +133,8 @@ class cliente extends pessoa {
 
     saque(valor)
     {
-        if(this.saldoCliente >= valor){
-            this.setSaldo(-valor);
+        if(this.Saldo >= valor){
+            this.Saldo += -valor;
             this.salvarHistorico(new movimentacao(this, -valor));
         }
         else console.log("Dinheiro insuficiente")  
@@ -143,7 +142,7 @@ class cliente extends pessoa {
 
     deposito(valor)
     {
-        // Saldo = valor;
+        this.saldo += valor;
         this.salvarHistorico(new movimentacao(this, +valor));
     }
     
@@ -155,16 +154,16 @@ class cliente extends pessoa {
 
     constructor (nome, dataNascimento, cpf, agencia){
         super(nome, dataNascimento, cpf);
-        this.#saldo = 0;
+        this.Saldo = 0;
         this.#movimentacoes = [];
         this.#agenciaId = agencia;
     }
 }
 
-agencia1 = new agencia('Rua Paraiba, 107, Centro - Tres Lagoas/MS')
+agencia1 = new agencia('Bradesco 001', 'Rua Paraiba, 107, Centro - Tres Lagoas/MS')
 hudson = new cliente('hudson', '20/10/2000', 302010, agencia1.agenciaId)
 arthur = new cliente('Artgur', '13/20/2000', 102030, agencia1.agenciaId)
-
+hudson.deposito(10)
 hudson.transferencia(5, arthur)
 console.log(hudson.Saldo)
 // const elemento = document.getElementById("navbar-brand");
