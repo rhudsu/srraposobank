@@ -46,7 +46,7 @@ class agencia {
         this.countAgencia++;
     }
     
-    get agenciaId (){
+    get Id (){
         return this.#id;
     }
 
