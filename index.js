@@ -68,15 +68,21 @@ class movimentacao
         this.valor = valor
         return this
     }
-
-
-
-    
 }
 
-class cliente {
+class pessoa {
     nome;
-    idade;
+    dataNascimento;
+    cpf;
+
+    constructor (nome, dataNascimento, cpf){
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.cpf = cpf;
+    }  
+}
+
+class cliente extends pessoa {
     saldoCliente;
     #agenciaId;
     movimentacoes = [];
@@ -135,14 +141,12 @@ class cliente {
         this.movimentacoes.push(idMov)
     } 
 
-    constructor (nome, idade, agencia){
-        this.nome = nome;
-        this.idade = idade;
+    constructor (nome, dataNascimento, cpf, agencia){
+        super(nome, dataNascimento, cpf);
         this.saldoCliente = 0;
         this.historicoCliente = [];
         this.#agenciaId = agencia;
     }
-
 }
 
 agencia1 = new agencia('Rua Paraiba, 107, Centro - Tres Lagoas/MS')
