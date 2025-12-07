@@ -38,6 +38,8 @@
 
 class agencia {
 	static countAgencia = 1;
+    #nome;
+    #endereco;
     #id;
 	
     static countAgenciaId(){
@@ -48,8 +50,18 @@ class agencia {
         return this.#id;
     }
 
-    constructor (){
+    get Nome(){
+        return this.#nome;
+    }
+
+    get Endereco(){
+        return this.#endereco;
+    }  
+
+    constructor (nome, endereco){
         this.#id = this.constructor.countAgencia;
+        this.#nome = nome;
+        this.#endereco = endereco;
         this.constructor.countAgenciaId();
     }
 }
