@@ -14,24 +14,24 @@
 
 
 // })
-function criarCliente(event)
-{
+// function criarCliente(event)
+// {
 	
-	event.preventDefault()
+// 	event.preventDefault()
 	
-    const form = event.target
+//     const form = event.target
 	
-    const dadosForm = new FormData(form)
+//     const dadosForm = new FormData(form)
 	
-    const nome = dadosForm.get('nome')
+//     const nome = dadosForm.get('nome')
     
-    const idade = dadosForm.get('idade')
+//     const idade = dadosForm.get('idade')
 	
-    const agencia_id = dadosForm.get('agencia')
+//     const agencia_id = dadosForm.get('agencia')
 	
-    const clientado = new cliente(nome, idade, agencia_id)
-}
-document.getElementById('forms').addEventListener('submit', criarCliente);
+//     const clientado = new cliente(nome, idade, agencia_id)
+// }
+// document.getElementById('forms').addEventListener('submit', criarCliente);
 
 
 // objetificação do hud
@@ -83,34 +83,34 @@ class pessoa {
 }
 
 class cliente extends pessoa {
-    saldoCliente;
+    #saldo;
     #agenciaId;
-    movimentacoes = [];
+    #movimentacoes = [];
  
     get Saldo(){
-        return this.saldoCliente;
+        return this.saldo;
     }
 
     set Saldo(valor){
-        this.saldoCliente += valor
+        this.saldo += valor
     }
 
-    get agencia(){
+    get Agencia(){
         return this.#agenciaId;
         
     }
 
-    get historico(){
-        return this.movimentacoes;
+    get Historico(){
+        return this.#movimentacoes;
     }
 
     transferencia(valor, outro) 
     {
         if(this == outro) 
             return 'Voce não pode transferir para voce mesmo'
-        if(this.saldoCliente >= valor) {
-            outro.setSaldo(valor)
-            this.setSaldo(-valor)
+        if(this.#saldo >= valor) {
+            outro.Saldo(valor)
+            this.Saldo(-valor)
            
             console.log(`${outro.nome} Recebeu ${valor} de ${this.nome}`)
 
@@ -138,20 +138,20 @@ class cliente extends pessoa {
     salvarHistorico(idMov)
     {   
         console.log(idMov)
-        this.movimentacoes.push(idMov)
+        this.#movimentacoes.push(idMov)
     } 
 
     constructor (nome, dataNascimento, cpf, agencia){
         super(nome, dataNascimento, cpf);
-        this.saldoCliente = 0;
-        this.historicoCliente = [];
+        this.#saldo = 0;
+        this.#movimentacoes = [];
         this.#agenciaId = agencia;
     }
 }
 
 agencia1 = new agencia('Rua Paraiba, 107, Centro - Tres Lagoas/MS')
-hudson = new cliente('hudson', 10, agencia1.agenciaId)
-arthur = new cliente('Artgur', 10, agencia1.agenciaId)
+hudson = new cliente('hudson', '20/10/2000', 302010, agencia1.agenciaId)
+arthur = new cliente('Artgur', '13/20/2000', 102030, agencia1.agenciaId)
 
 hudson.transferencia(5, arthur)
 console.log(hudson.Saldo)
@@ -159,4 +159,4 @@ console.log(hudson.Saldo)
 // elemento.style.color = "yellow";
 hudson.deposito(10)
 hudson.saque(10)
-console.log(hudson.historico)
+console.log(hudson.Historico)
