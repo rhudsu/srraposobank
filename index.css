@@ -13,22 +13,24 @@ body{
 main
 {
 	width: 100%;
-	height: 600px;
+	height: 570px;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	/*align-items: center;*/
 }
  
 nav{
- 	background-color: rgb(255, 157, 0);
-	height: 70px;
+ 	background-color: rgb(247, 152, 64);
+	filter: blur(50%);
+	height: 80px;
+	box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
 }
  
 .logoandname{
 	display: flex;
   	align-items: center;
 	margin-left: 20px;
-
+	flex-direction: row;
 	font-family: "Montserrat", sans-serif;
 	font-optical-sizing: auto;
 
@@ -60,24 +62,62 @@ nav{
 
 .navBotoes
 {
-	background-color:rgb(225, 139, 0); 
-	width: 100%;
+	background-color: rgb(248, 248, 248);
+	width: 85%;
 	height: 10%;
+	display: flex;
+	border-radius: 30px;
+	/*border: rgb(145, 145, 145) 4px solid;*/
+	justify-self: center;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .botoes{
 	display: flex;
+	width: auto;
+	height: auto;
 	margin-right: 10px;
+	align-self: right;
+	justify-self: right;
 	gap: 10px;
-	justify-content: flex-end;
-	align-content: center;
 	height: 100%;
+}
+
+.areaTransfer{
+	height: auto;
+	width: auto;
+	display: inline-block;
+	align-self: center;
+
+}
+
+.saldo_conta{
+	display: flex;
+	width: auto;
+    height: 40px;
+	padding: 0px 15px 0px 15px;
+    background-color: white;
+    border-radius: 25px;
+    border: 0px;
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+    font-size: 20px;
+	align-self: center;
+	justify-self: left;
+	align-items: center;
+	margin-left: 20px;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .extrato{
 	background-color: antiquewhite;
  	height: 100%;
-	border: solid 1px darkorange ;
+	border-radius: 30px;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	overflow-y: auto;
+	padding-top: 30px;
 }
 
  
@@ -92,12 +132,16 @@ nav{
 .action
 {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	background-color:gainsboro;
-	width: 80%;	
+	background-color:rgb(248, 248, 248);
+	width: 85%;	
 	height: 80%;
+	margin-top: 20px;
+	border-radius: 30px;
+	gap: 20px;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
  
 } 
 
@@ -106,11 +150,14 @@ nav{
 	flex-direction: column;
 	align-items: left;
 	justify-content: center;
-	background-color: rgb(255, 157, 0);
+	background-color: rgb(255, 255, 255);
 	text-align: left;
 	padding: 20px;
-
 	font-size: large;
+	border-radius: 30px;
+	margin-bottom: 30px;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	text-align: center;
 }
 
 
@@ -126,6 +173,7 @@ button{
     font-weight: 500;
     font-size: 20px;
 	align-self: center;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 button:hover{
@@ -177,4 +225,32 @@ input {
 #cadastroForm {
 	display: flex;
 	flex-direction: column;
+}
+
+#fontePequena{
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+    font-size: 16px;	
+}
+
+input{
+	
+                padding: 0px 10px;
+                font-size: 12px;
+                line-height: 20px;
+                color: #2e2824;
+                vertical-align: middle;
+                background-color: #ffffff;
+                background-repeat: no-repeat;
+                background-position: right 8px center;
+                border: 1px solid #e1e4e8;
+                border-radius: 16px;
+                outline: none;
+                box-shadow: rgba(225, 228, 232, 0.2) 0px 1px 0px 0px inset;
+                :focus{
+                    border-color: rgb(214, 130, 3);
+                    outline: none;
+                    box-shadow: rgba(214, 130, 3, 0.3) 0px 0px 0px 3px;
+                }
+                
 }
