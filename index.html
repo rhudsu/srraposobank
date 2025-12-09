@@ -19,26 +19,25 @@
 			<h1>Raposo Bank</h1>
 		</div>
 		<div class="botoes">
-			<button id="btwhite">Login</button>
-			<button>Cadastrar</button>
+			<button id="loginBtn">Login</button>
+			<button id="cadastrarBtn" >Cadastrar</button>
 		</div>
 	</nav>
 
 	<main>
-		<div id="login">
-			<h2>Login</h2>
+		<div class="acao" id="login">
+			<h2>Acessar banco</h2>
 			<form id="loginForm">
-				<label for="username">CPF:</label>
-				<input type="text" id="username" name="username" required>
+				<label for="conta">Selecione a Conta:</label>
+				<select id="conta" name="conta" required>
+					<option value="">-- Escolha uma conta --</option>
+				</select>
 				<br>
-				<label 	for="password">Senha:</label>
-				<input type="password" id="password" name="password" required>
-				<br>					 
-				<button type="submit">Login</button>
+				<button type="submit">Acessar</button>
 			</form> 	
 		</div>
 
-		<div id="cadastro">
+		<div class="acao" id="cadastro">
 			<h2>Cadastro</h2>
 			<form id="cadastroForm">
 				<label for="nome">Nome:</label>
@@ -53,6 +52,7 @@
 				<label for="password">Senha:</label>
 				<input type="password" id="password" name="password" required>
  				<br> -->
+				<br>
 				<button type="submit">Cadastro</button>
 			</form> 	
 		</div> 
@@ -60,59 +60,68 @@
 		
 		<div class="container" id="1">
 			<div class="extrato">
-				<h1 style="text-align: center;">extrato</h1>
+				<h2 style="text-align: center;">Extrato</h2>
 				<div id="linhasExtrato">
-					<!-- <div class="linhaExtrato">
+
+					<div class="lagos">
 						Pix para albert aeuns	  
 						<div style="color: green;"><strong>R$100</strong></div>
-					</div> -->
-				<h2 style="text-align: center;">Extrato</h2>
-				<div class="lagos">
-					Pix para albert aeuns	  
-					<div style="color: green;"><strong>R$100</strong></div>
+					</div>
+					<div class="lagos">
+						Pix para albert richards	  
+						<div style="color: green;"><strong>R$100</strong></div>
+					</div>
 				</div>
-				<div class="lagos">
-					Pix para albert richards	  
-					<div style="color: green;"><strong>R$100</strong></div>
-				</div>
-				<br>
  			</div>
 
 			<div class="acoes">
 				<div class="navBotoes"> 
-					<div class="saldo_conta">Saldo em conta: R$0,00</div>
+					<div class="saldo_conta" id="saldo_conta">Saldo em conta: R$0,00</div>
 					<div class="botoes">
-						<button id="sacarBtn">Sacar</button>
-						<button id="depositarBtn">Depositar</button>
+						<button class="botoes-acoes" id="sacarBtn">Sacar</button>
+						<button class="botoes-acoes" id="depositarBtn">Depositar</button>
+						<button class="botoes-acoes" id="transferirBtn">Transferir</button>
+
 					</div>
 				</div>
 
 				<div class="asdasd">				
-					<div class="action">
-						<h2 class="areaTransfer">Área de Transferência</h2>
-						<div class="transacao" id="transacao" id="fontePequena">
-							<form id="transacaoForm">
+					<div class="areadeacao">
+						<div class='acao' id="transacao">
+							<h2>Realizar Transferencia</h2>
+							<br>
+							<form class="containerAction" id="transacaoForm" id="fontePequena">
 								<label for="">Chave Pix</label>	
 								<input type="text" name="destinoPix" id="destinoPix" placeholder="CPF do destinatário">      
 								<br>
 								<label for="">Valor</label>
 								<input type="number" name="valorPix" id="valorPix">                
-								<br>	
+								<br>
 								<button type="submit" >Confirmar</button>
 							</form>
 						</div>
 
-						<div class="sacar" id="sacar">
-							<label for="">Valor</label>
-							<input type="text" name="" id="">
-							<button id="confirmar">CONFIRMAR</button>
+						<div class='acao' id="saque">
+							<h2>Realizar Saque</h2>
+							<br>
+							<form class="containerAction" id="saqueForm" id="fontePequena">
+								<label for="">Valor</label>
+								<input type="number" name="valorSaque" id="valorSaque">                
+								<br>
+								<button type="submit" >Confirmar</button>
+							</form>
 						</div>
 
-						<div class="deposito" id="deposito">
-							<label for="">Valor</label>
-							<input type="text" name="" id="">
-							<button id="confirmar">CONFIRMAR</button>
-						</div> 	 
+						<div class='acao' id="deposito">
+							<h2>Realizar deposito</h2>
+							<br>
+							<form class="containerAction" id="depositoForm" id="fontePequena">
+								<label for="valorDeposito">Valor</label>
+								<input type="number" name="valorDeposito" id="valorDeposito">                
+								<br>
+								<button type="submit" >Confirmar</button>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>

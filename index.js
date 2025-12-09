@@ -1,3 +1,23 @@
+document.getElementById('cadastroForm').addEventListener('submit', criarCliente);
+document.getElementById('saqueForm').addEventListener('submit', saqueCliente);
+document.getElementById('depositoForm').addEventListener('submit', depositoCliente);
+
+// botoes
+document.getElementById('sacarBtn').addEventListener('click', mostrarSaque);
+document.getElementById('depositarBtn').addEventListener('click', mostarDeposito);
+document.getElementById('transferirBtn').addEventListener('click', mostrarTransferencia);
+document.getElementById('cadastrarBtn').addEventListener('click', mostrarCadastro);
+document.getElementById('loginBtn').addEventListener('click', mostrarLogin);
+
+
+document.getElementById('login').style.display = 'none'
+document.getElementById('1').style.display = 'grid'
+document.getElementById('cadastro').style.display = 'none'
+document.getElementById('saque').style.display = 'none'
+document.getElementById('deposito').style.display = 'none'
+document.getElementById('transacao').style.display = 'none' 
+
+
 function criarCliente(event)
 {
 	event.preventDefault()	
@@ -13,25 +33,128 @@ function criarCliente(event)
     console.log(`Cliente ${cliente.nome} criado com sucesso!`)
 }
 
+function saqueCliente(event)
+{
+	event.preventDefault()	
+    const form = event.target
+    const dadosForm = new FormData(form)
+    const valor = dadosForm.get('valorSaque')
+    hudson.saque(parseFloat(valor))
+    atualizarExtrato(hudson)
+}
+
+function depositoCliente(event)
+{
+	event.preventDefault()	
+    const form = event.target
+    const dadosForm = new FormData(form)
+    const valor = dadosForm.get('valorDeposito')
+    hudson.deposito(parseFloat(valor))
+    atualizarExtrato(hudson)
+}
+
+
+function mostrarCadastro(){
+    document.getElementById('login').style.display = 'none'
+    document.getElementById('1').style.display = 'none'
+    document.getElementById('cadastro').style.display = 'flex'
+    document.getElementById('saque').style.display = 'none'
+    document.getElementById('deposito').style.display = 'none'
+    document.getElementById('transacao').style.display = 'none'    
+    document.querySelector('main').style.alignItems = 'normal'
+    atualizarExtrato(hudson)
+}
+
+function mostrarLogin(){
+    document.getElementById('login').style.display = 'none'
+    document.getElementById('1').style.display = 'none'
+    document.getElementById('cadastro').style.display = 'none'
+    document.getElementById('saque').style.display = 'none'
+    document.getElementById('deposito').style.display = 'flex'
+    document.getElementById('transacao').style.display = 'none'   
+    document.getElementById('login').style.display = 'flex'   
+
+
+    const selectConta = document.getElementById('conta');
+    selectConta.id = 'conta';
+    selectConta.name = 'conta';
+    selectConta.required = true;
+
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.textContent = '-- Escolha uma conta --';
+    selectConta.appendChild(defaultOption);
+
+    Cliente.clientes.forEach(cliente => {
+        const option = document.createElement('option');
+        option.value = cliente;  
+        option.textContent = cliente.nome;  
+        selectConta.appendChild(option);
+    });
+
+    document.getElementById('login').appendChild(selectConta); // Append the select to the login section
+
+
+
+    document.querySelector('main').style.alignItems = 'normal'
+    atualizarExtrato(hudson)
+}
+
 function mostrarPrincipal(){
     document.getElementById('login').style.display = 'none'
     document.getElementById('1').style.display = 'grid'
     document.getElementById('cadastro').style.display = 'none'
-    document.getElementById('sacar').style.display = 'none'
+    document.getElementById('saque').style.display = 'flex'
     document.getElementById('deposito').style.display = 'none'
-     
+    document.getElementById('transacao').style.display = 'none'    
     document.querySelector('main').style.alignItems = 'normal'
+    atualizarExtrato(hudson)
 }
-document.getElementById('cadastroForm').addEventListener('submit', criarCliente);
-document.getElementById('login').style.display = 'none'
-document.getElementById('1').style.display = 'none'
+
+function mostrarTransferencia(){
+    console.log("mostrar transferencia")
+
+    document.getElementById('login').style.display = 'none'
+    document.getElementById('1').style.display = 'grid'
+    document.getElementById('cadastro').style.display = 'none'
+    document.getElementById('saque').style.display = 'none'
+    document.getElementById('deposito').style.display = 'none'
+    document.getElementById('transacao').style.display = 'flex'    
+    document.querySelector('main').style.alignItems = 'normal'
+    atualizarExtrato(hudson)
+}
+
+function mostrarSaque(){
+    console.log("mostrar saque")
+    document.getElementById('login').style.display = 'none'
+    document.getElementById('1').style.display = 'grid'
+    document.getElementById('cadastro').style.display = 'none'
+    document.getElementById('saque').style.display = 'flex'
+    document.getElementById('deposito').style.display = 'none'
+    document.getElementById('transacao').style.display = 'none'    
+    document.querySelector('main').style.alignItems = 'normal'
+    atualizarExtrato(hudson)
+}
+
+function mostarDeposito(){
+    document.getElementById('login').style.display = 'none'
+    document.getElementById('1').style.display = 'grid'
+    document.getElementById('cadastro').style.display = 'none'
+    document.getElementById('saque').style.display = 'none'
+    document.getElementById('deposito').style.display = 'flex'
+    document.getElementById('transacao').style.display = 'none'    
+
+    document.querySelector('main').style.alignItems = 'normal'
+    atualizarExtrato(hudson)
+}
+
+
 
 function atualizarExtrato(cliente){
     document.getElementById('linhasExtrato').innerHTML = ''
     let extratoHtml = ''
 
     cliente.Historico.slice().reverse().forEach(transacao => {
-        
         if(transacao.pessoa2) 
         {
             if(transacao.valor < 0)
@@ -58,11 +181,17 @@ function atualizarExtrato(cliente){
             extratoHtml = `Deposito realizado
             <div style="color: green;"><strong>R$${transacao.valor}</strong></div>`
         }
+
+
         const linha = document.createElement('div')
         linha.className = 'linhaExtrato'  
         linha.innerHTML = extratoHtml
         document.getElementById('linhasExtrato').appendChild(linha)
     });
+
+    console.log(cliente.Saldo)
+    const saldo = document.getElementById('saldo_conta')
+    saldo.innerHTML = `<span style="font-size: 15px">Saldo Atual:</span> <strong style="color: ${cliente.Saldo >= 0 ? 'green' : 'red'};"> R$${cliente.Saldo}</strong>`
 }
 
 
