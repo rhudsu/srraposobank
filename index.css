@@ -78,6 +78,9 @@ nav{
 	background-color: antiquewhite;
  	height: 100%;
 	border: solid 1px darkorange ;
+	display: flex;
+	flex-direction: column;
+
 }
 
  
@@ -146,15 +149,24 @@ input {
 .confirmar{
 	height: 100px;
 	width: 80%;
+	align-self: center;
+}
+#linhasExtrato
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin: 10px;
 }
 
-.lagos
+.linhaExtrato
 {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	margin: 10px;
-}
+	margin: 5px;
+	padding: 5px;
+ }
 
 #id{
 	justify-items: center;

@@ -27,7 +27,7 @@
 				<label for="username">CPF:</label>
 				<input type="text" id="username" name="username" required>
 				<br>
-				<label for="password">Senha:</label>
+				<label 	for="password">Senha:</label>
 				<input type="password" id="password" name="password" required>
 				<br>					 
 				<button type="submit">Login</button>
@@ -57,9 +57,11 @@
 		<div class="container" id="1">
 			<div class="extrato">
 				<h1 style="text-align: center;">extrato</h1>
-				<div class="lagos">
-					Pix para albert aeuns	  
-					<div style="color: green;"><strong>R$100</strong></div>
+				<div id="linhasExtrato">
+					<!-- <div class="linhaExtrato">
+						Pix para albert aeuns	  
+						<div style="color: green;"><strong>R$100</strong></div>
+					</div> -->
 				</div>
 				<br>
  			</div>
@@ -75,16 +77,18 @@
 				<div class="asdasd">				
 					<div class="action">
 						<div class="transacao" id="transacao">
-							<label for="">Pix</label>	
-							<input type="text" name="" id="">		
-							<br>
-							<label for="">Valor</label>
-							<input type="text" name="" id="">				
-							<br>	
-							<button id="confirmar">CONFIRMAR</button>
+							<form id="transacaoForm">
+								<label for="">Pix</label>	
+								<input type="text" name="destinoPix" id="destinoPix" placeholder="CPF do destinatário">      
+								<br>
+								<label for="">Valor</label>
+								<input type="number" name="valorPix" id="valorPix">                
+								<br>	
+								<button type="submit" >Confirmar</button>
+							</form>
 						</div>
 
-						<!-- <div class="sacar" id="sacar">
+						<div class="sacar" id="sacar">
 							<label for="">Valor</label>
 							<input type="text" name="" id="">
 							<button id="confirmar">CONFIRMAR</button>
@@ -94,7 +98,7 @@
 							<label for="">Valor</label>
 							<input type="text" name="" id="">
 							<button id="confirmar">CONFIRMAR</button>
-						</div> 	 -->
+						</div> 	 
 					</div>
 				</div>
 			</div>

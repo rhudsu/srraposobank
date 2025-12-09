@@ -1,19 +1,3 @@
-// // anexação do js com html do kenzo
-
-// const formulario = document.getElementById("forms")
-
-// formulario.addEventListener('submit', function (cadastro){
-//     cadastro.preventDefault
-
-//     const dadosFormulados = new FormData(formulario)
-
-//     const objetoPuro = Object.fromEntries(dadosFormulados.entries())
-
-//     const jsonString = JSON.stringify(objetoPuro, null, 2)
-
-
-// })
-
 function criarCliente(event)
 {
 	event.preventDefault()	
@@ -35,15 +19,91 @@ function mostrarPrincipal(){
     document.getElementById('cadastro').style.display = 'none'
     document.getElementById('sacar').style.display = 'none'
     document.getElementById('deposito').style.display = 'none'
-    document.getElementById('cadastro').style.display = 'none'
- 
-    document.getElementById('main').style.backgroundColor = 'red'
-
+     
+    document.querySelector('main').style.alignItems = 'normal'
 }
-
 document.getElementById('cadastroForm').addEventListener('submit', criarCliente);
 document.getElementById('login').style.display = 'none'
 document.getElementById('1').style.display = 'none'
+
+function atualizarExtrato(cliente){
+    document.getElementById('linhasExtrato').innerHTML = ''
+    let extratoHtml = ''
+
+    cliente.Historico.slice().reverse().forEach(transacao => {
+        
+        if(transacao.pessoa2) 
+        {
+            if(transacao.valor < 0)
+            {
+                extratoHtml = `Pix para ${transacao.pessoa2.nome}
+                <div style="color: red;"><strong>R$${transacao.valor}</strong></div>`
+            }
+
+            else if(transacao.valor > 0)
+            {
+                extratoHtml = `Pix recebido de ${transacao.pessoa2.nome}
+                <div style="color: green;"><strong>R$${transacao.valor}</strong></div>`
+            }
+        }
+
+        else if(transacao.valor < 0 && !transacao.pessoa2)
+        {
+            extratoHtml = `Saque realizado
+            <div style="color: red;"><strong>R$${transacao.valor}</strong></div>`
+        }
+
+        else if(transacao.valor > 0 && !transacao.pessoa2)
+        {
+            extratoHtml = `Deposito realizado
+            <div style="color: green;"><strong>R$${transacao.valor}</strong></div>`
+        }
+        const linha = document.createElement('div')
+        linha.className = 'linhaExtrato'  
+        linha.innerHTML = extratoHtml
+        document.getElementById('linhasExtrato').appendChild(linha)
+    });
+}
+
+
+document.getElementById('transacaoForm').addEventListener('submit', realizarPix);
+
+function realizarPix(event){
+    event.preventDefault()	
+    const forma = event.target
+    console.log(forma)
+    const dadosForm = new FormData(forma)
+
+    let destino = dadosForm.get('destinoPix')
+    let valor = dadosForm.get('valorPix')
+
+    // fallback: se o form não tiver name, pegar pelo id
+    if (!destino) destino = document.getElementById('destinoPix')?.value || ''
+    if (!valor) valor = document.getElementById('valorPix')?.value || ''
+
+    destino = String(destino).trim()
+    valor = parseFloat(valor)
+
+    if (!destino) {
+        console.log('Destino inválido')
+        return
+    }
+
+    if (Number.isNaN(valor)) {
+        console.log('Valor inválido')
+        return
+    }
+
+    console.log(destino, valor)
+    const clienteDestino = Cliente.clientes.find(c => String(c.cpf) == destino)
+    if(clienteDestino)
+    {
+        if(hudson.transferencia(valor, clienteDestino))
+            atualizarExtrato(hudson)
+        else console.log("Falha na transferência")
+    }
+    else console.log("Cliente não encontrado")
+}
 
 
 // objetificação do hud
@@ -84,7 +144,7 @@ class movimentacao
     date; 
     pessoa;
     pessoa2; valor;
-    constructor (pessoa, valor, pessoa2 = null, date = new Date())
+    constructor (pessoa, valor, pessoa2 = null)
     {
         this.date = new Date();
         this.pessoa = pessoa,
@@ -107,10 +167,12 @@ class pessoa {
 }
 
 class Cliente extends pessoa {
+    static clientes = [];
     #saldo = 0;
     #agenciaId;
     #movimentacoes = [];
- 
+
+
     static cadastrar(nome, dataNascimento, cpf, agencia){
         return new Cliente(nome, dataNascimento, cpf, agencia)
     }
@@ -143,9 +205,10 @@ class Cliente extends pessoa {
             console.log(`${outro.nome} Recebeu ${valor} de ${this.nome}`)
 
             this.salvarHistorico(new movimentacao(this, -valor, outro))
-            this.salvarHistorico(new movimentacao(outro, valor, this))
+            outro.salvarHistorico(new movimentacao(outro, valor, this))
+            return true
         }   
-        else console.log("Dinheiro insuficiente")  
+        else return console.log("Dinheiro insuficiente")  
     }
 
     saque(valor)
@@ -174,13 +237,14 @@ class Cliente extends pessoa {
         this.#saldo = 0;
         this.#movimentacoes = [];
         this.#agenciaId = agencia;
+        Cliente.clientes.push(this);
     }
 }
 
 agencia1 = new agencia('Bradesco 001', 'Rua Paraiba, 107, Centro - Tres Lagoas/MS')
 hudson = new Cliente('hudson', '20/10/2000', 302010, agencia1.Id)
 arthur = new Cliente('Artgur', '13/20/2000', 102030, agencia1.Id)
-hudson.deposito(10)
+hudson.deposito(1000)
 console.log(hudson.Saldo)
 
 hudson.transferencia(5, arthur)
@@ -192,3 +256,4 @@ hudson.saque(10)
 console.log(hudson.Historico)
 
 mostrarPrincipal()
+atualizarExtrato(hudson)
