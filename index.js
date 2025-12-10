@@ -383,6 +383,3 @@ hudson.deposito(10)
 hudson.saque(10)
 
 console.log(hudson.Historico)
-
-mostrarPrincipal()
-atualizarExtrato(hudson)
