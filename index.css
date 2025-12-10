@@ -159,7 +159,9 @@ nav{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;	
+	justify-content: center;
+	min-width: 500px;
+
 }
 
 .containerAction{
@@ -193,14 +195,15 @@ button{
 }
 
 .botoes-acoes{
-	width: 90px;
+	width: auto;
+	min-width: 70px;
 	height: 35px;
 	background-color: rgb(255, 136, 0);
 	border-radius: 25px;
 	border: 0px;
 	color: rgb(0, 0, 0);
 	font-weight: 500;
-	font-size: 18px;
+	font-size: 16px;
 	align-self: center;
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
@@ -208,6 +211,9 @@ button{
 #loginBtn{
 	background-color: white;
 }
+
+#acessarBtn{
+	margin-top: 10px;}	
 
 button:hover{
     filter:brightness(50%);
@@ -279,7 +285,7 @@ input {
     font-size: 16px;	
 }
 
-input{
+input, #conta{
 	
                 padding: 0px 10px;
                 font-size: 14px;
