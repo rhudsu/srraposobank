@@ -1,6 +1,4 @@
 
-// objetificação do hud
-
 class agencia {
 	static countAgencia = 1;
     #nome;
@@ -66,6 +64,10 @@ class Cliente extends pessoa {
     #movimentacoes = [];
 
     static cadastrar(nome, dataNascimento, cpf, agencia){
+        if(this.clientes.find(c => c.cpf == cpf)){
+            msgErro('CPF já cadastrado');
+            return null;
+        }
         return new Cliente(nome, dataNascimento, cpf, agencia)
     }
 
@@ -98,7 +100,7 @@ class Cliente extends pessoa {
             outro.Saldo += valor
             this.Saldo += -valor
            
-            console.log(`${outro.nome} Recebeu ${valor} de ${this.nome}`)
+            // console.log(`${outro.nome} Recebeu ${valor} de ${this.nome}`)
 
             this.salvarHistorico(new movimentacao(this, -valor, outro))
             outro.salvarHistorico(new movimentacao(outro, valor, this))
@@ -124,7 +126,6 @@ class Cliente extends pessoa {
     
     salvarHistorico(idMov)
     {   
-        console.log(idMov)
         this.#movimentacoes.push(idMov)
     } 
 

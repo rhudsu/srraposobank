@@ -21,16 +21,27 @@ document.getElementById('transacao').style.display = 'none'
 
 currentCliente = null;
 
-function acessarConta(event)
-{
+function acessarConta(event, clienteCpf = -1)
+{ 
     event.preventDefault()	
     const form = event.target
     const dadosForm = new FormData(form)
-    const clienteCpf = dadosForm.get('conta')
-    const cliente = Cliente.clientes.find(c => c.cpf == clienteCpf)
- 
+    clienteCpf = dadosForm.get('conta')
+    cliente = Cliente.clientes.find(c => c.cpf == clienteCpf)
+
     if(cliente)
     {
+        currentCliente = cliente
+        mostrarPrincipal()
+        console.log(`Bem vindo, ${currentCliente.nome}`)
+    }
+    else alert('Cliente não existe');
+}
+
+function acessarContaPorCpf(clienteCpf)
+{ 
+    cliente = Cliente.clientes.find(c => c.cpf == clienteCpf)   
+    if(cliente){
         currentCliente = cliente
         mostrarPrincipal()
         console.log(`Bem vindo, ${currentCliente.nome}`)
@@ -48,8 +59,9 @@ function criarCliente(event)
     const cpf = dadosForm.get('cpf')
     const cliente = Cliente.cadastrar(nome, dataNascimento, cpf, agencia_id)
 
-    mostrarPrincipal()
     console.log(`Cliente ${cliente.nome} criado com sucesso!`)
+    acessarContaPorCpf(cpf)
+
 }
 
 function saqueCliente(event)
@@ -146,8 +158,6 @@ function mostrarPrincipal(){
 }
 
 function mostrarTransferencia(){
-    console.log("mostrar transferencia")
-
     document.getElementById('login').style.display = 'none'
     document.getElementById('1').style.display = 'grid'
     document.getElementById('cadastro').style.display = 'none'
@@ -159,7 +169,6 @@ function mostrarTransferencia(){
 }
 
 function mostrarSaque(){
-    console.log("mostrar saque")
     document.getElementById('login').style.display = 'none'
     document.getElementById('1').style.display = 'grid'
     document.getElementById('cadastro').style.display = 'none'
