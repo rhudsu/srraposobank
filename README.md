@@ -15,7 +15,6 @@ Projeto de banco criado com intuito de treinar GitFlow.
 
 - **Eduardo Perucci**
 - **Hudson Batista**
-- **Inácio Azevedo**
 - **Kenzo Senna**
 
 
